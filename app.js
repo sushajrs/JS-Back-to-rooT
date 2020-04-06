@@ -118,14 +118,23 @@ console.log(newStr);
  console.log(isPalindrome(strNew));
  
 
-//9.FIND THE LARGEST NUMBER IN A ARRAY
+//9.FIND THE LARGEST NUMBER IN A 
+     // IN NESTED ARRAYS
 
-const numbers = [1, 2, 3, 4, 5, 6];
+const numbers = [ 1, 2, 3, [ 4, 5, 6,[7, 8, 9] ], 4, 5, 6 ];
 
     //Simple way to do
-    console.log(Math.max(...numbers));
+    //console.log(Math.max(...numbers));
 
-    //with Algorith
+    //with Algorithm
+
+    const flatten = (values) => values.reduce(
+        (acc, item, index, array) => acc.concat(
+            Array.isArray(item) ? flatten(item): item
+        ), []
+    )
+
+
     const largestNumber = (values) => {
         let highest = 0;
         for(let i = 0; i < values.length; i+=1) {
@@ -135,5 +144,6 @@ const numbers = [1, 2, 3, 4, 5, 6];
         }
         return highest; 
     }
-    console.log(largestNumber(numbers));
+    console.log(largestNumber(flatten(numbers)));
+
 
